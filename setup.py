@@ -29,7 +29,7 @@ test_requirements = [
 setup(
     name='solve_led_project',
     version='0.1.0',
-    description="PFilShould install a console script which shows the lights that are on etc.",
+    description="Should install a console script which shows the lights that are on etc.",
     long_description=readme + '\n\n' + history,
     author="Conor Lawlor",
     author_email='conor.lawlor@ucdconnect.ie',
