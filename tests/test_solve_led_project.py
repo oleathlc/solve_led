@@ -20,16 +20,5 @@ def test_checkCoordinates():
     pass
 
 def test_checkArgs():
+    #Not sure I can actually test this as it requires system input?
     pass
-
-
-'''def test_command_line_interface():
-    """Test the CLI."""
-    runner = CliRunner()
-    result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'solve_led_project.cli.main' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
-'''
