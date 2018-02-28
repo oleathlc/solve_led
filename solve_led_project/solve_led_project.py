@@ -64,7 +64,7 @@ class lightTester():
             start1 = 0
         if start2 < 0:
             start2 = 0
-        if end1 >self.size-1: #make sure end points aren't greater than size
+        if end1 >self.size-1: #make sure end points aren't greater than array size
             end1 = self.size-1
         if end2 >self.size-1:
             end2 = self.size-1
