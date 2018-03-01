@@ -34,6 +34,7 @@ def readFile(file):
         commandList=url.read().decode('utf-8') 
     else:
         commandList = open(file, 'r')
+        commandList = commandList.read()
     return commandList
 
 def getCommand(cmd):
