@@ -6,7 +6,7 @@
 import pytest
 from click.testing import CliRunner
 
-from solve_led_project.solve_led_project import readFile
+from solve_led_project.solve_led_project import *
 
 def test_checkReadUrl():
     testFile = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt"
@@ -16,8 +16,9 @@ def test_checkReadFile():
     test_file = 'lineTest.txt'
     assert readFile(test_file)!= None
 
-def test_checkCoordinates():
-    pass
+def test_checkCommand():
+    text = "turn on 0,0 through 999,999"
+    assert getCommand(text) == [('turn on', '0', '0', '999', '999')]
 
 def test_checkArgs():
     #Not sure I can actually test this as it requires system input?

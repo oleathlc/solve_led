@@ -13,6 +13,7 @@ def main():
     else:
         instructions = readFile(file)
         for line in instructions:
+            line = getCommand(line)
             lights.apply(line)
     
             return "The number occupied : " + light.count()
@@ -40,6 +41,11 @@ def readFile(file):
         commandList.read() 
     return commandList
 
+def getCommand(cmd):
+        pattern = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
+        command = re.findall(pattern, str(cmd))
+        return command
+
     
 class lightTester():
     lights=[]
@@ -47,19 +53,12 @@ class lightTester():
     def __init__(self,N):
         self.lights = [[False]*N for _ in range(size)]
         self.size = N
-        
-    def getCoordinates(self,cmd):
-        pattern = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
-        command = re.findall(pattern, str(cmd))
-        return command
     
     def apply(self,line):
-        line = getCoordinates(line)
         start1 = int(line[1])
         start2 = int(line[2])
         end1 = int(line[3])
         end2 = int(line[4])
-        
         if start1 < 0: #make sure start points are 0 or greater
             start1 = 0
         if start2 < 0:
@@ -73,28 +72,31 @@ class lightTester():
             if line[0] == "turn on":
                  for i in range(start1, end1):
                      for j in range(start2, end2):
-                         self.light[i][j] = True
-                 
+                         self.lights[i][j] = True  
             elif line[0] == "turn off":
                 for i in range(start1, end1):
                      for j in range(start2, end2):
-                         self.light[i][j] = False
+                         self.lights[i][j] = False
             elif line[0] =="switch":
                 for i in range(start1, end1):
                      for j in range(start2, end2):
-                         if self.light[i] == True:
-                             self.light[i]=False
+                         if self.lights[i] == True:
+                             self.lights[i]=False
                          else:
-                             self.light[i]==True
-                         if self.light[j] == True:
-                             self.light[j]=False
+                             self.lights[i]==True
+                         if self.lights[j] == True:
+                             self.lights[j]=False
                          else:
-                             self.light[j]==True
+                             self.lights[j]==True
         else:
             print("Invalid command!")
             
     def count(self):
-        pass
+        count=0
+        for i in range(len(self.lights)-1):
+                for j in range(len(self.lights)-1):
+                     if self.lights[i] == True or self.lights[j] ==True :
+                         count+=1
         return count
     
     
