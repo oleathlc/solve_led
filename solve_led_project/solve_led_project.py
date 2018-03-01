@@ -16,7 +16,7 @@ def main():
             line = getCommand(line)
             lights.apply(line)
     
-            return "The number occupied : " + light.count()
+            return "The number occupied : " + lights.count()
 
 if __name__ == '__main__':
     main()
@@ -51,10 +51,11 @@ class lightTester():
     lights=[]
     
     def __init__(self,N):
-        self.lights = [[False]*N for _ in range(size)]
+        self.lights = [[False]*N for _ in range(N)]
         self.size = N
     
     def apply(self,line):
+        print(line)
         start1 = int(line[1])
         start2 = int(line[2])
         end1 = int(line[3])
@@ -63,10 +64,10 @@ class lightTester():
             start1 = 0
         if start2 < 0:
             start2 = 0
-        if end1 >self.size-1: #make sure end points aren't greater than array size
+        if end1 >self.size: #make sure end points aren't greater than array size
             end1 = self.size-1
         if end2 >self.size-1:
-            end2 = self.size-1
+            end2 = self.size
         
         if (line[0] =="turn on") or (line[0] =="turn off" ) or (line[0] =="switch") :
             if line[0] == "turn on":
@@ -93,9 +94,9 @@ class lightTester():
             
     def count(self):
         count=0
-        for i in range(len(self.lights)-1):
-                for j in range(len(self.lights)-1):
-                     if self.lights[i] == True or self.lights[j] ==True :
+        for i in range(len(self.lights)):
+                for j in range(len(self.lights)):
+                     if self.lights[i][j] == True: 
                          count+=1
         return count
     

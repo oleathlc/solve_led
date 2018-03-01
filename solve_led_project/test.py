@@ -9,4 +9,5 @@ def getCommand(cmd):
         command = re.findall(pattern, str(cmd))
         return command
     
-print (getCommand(text))
+text = getCommand(text)
+print(type(text))

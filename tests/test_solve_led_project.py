@@ -20,6 +20,15 @@ def test_checkCommand():
     text = "turn on 0,0 through 999,999"
     assert getCommand(text) == [('turn on', '0', '0', '999', '999')]
 
+def test_lightTester():
+    lights = lightTester(5)
+    command = ['turn on', '0', '0', '5', '5']
+    lights.apply(command)
+    #print(lights.lights) #was here to check the array size
+    #print(lights.count()) #was here to check the count worked
+    assert lights.count() == 25
+
+
 def test_checkArgs():
     #Not sure I can actually test this as it requires system input?
     pass
