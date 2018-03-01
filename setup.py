@@ -14,6 +14,6 @@ setup(
     url='https://github.com/oleathlc/solve_led_project',
     entry_points={
         'console_scripts': ['solve_led_project=solve_led_project.solve_led_project:main'],
-    },
+    },packages['solve_led_project'],
     license="MIT license",
 )
