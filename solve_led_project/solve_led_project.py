@@ -6,39 +6,35 @@ import urllib.request
 import re
 
 def main():
-    lights = lightTester(N)
-    file = checkArgs()
-    if file == None:
-        return "Error"
+    #file = 'http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt'
+    if len(sys.argv)<3: #file == 0: #
+        return
+    elif  len(sys.argv)>3: #file == 1: #
+        return
     else:
-        instructions = readFile(file)
-        for line in instructions:
-            line = getCommand(line)
-            lights.apply(line)
-    
-            return "The number occupied : " + lights.count()
+        file = str(sys.argv[2])
+        if file == None:
+            return "Error"
+        else:
+            instructions = readFile(file)
+            firstLine = instructions.split('\n')[0]
+            instructions = getCommand(instructions)
+            rest = instructions[1:]
+            lights=lightTester(firstLine)
+            for line in rest:
+                lights.apply(line)
+            return "The number occupied : ", lights.count()
 
 if __name__ == '__main__':
     main()
 
-    
-def checkArgs():
-    if len(sys.argv)<3:
-        return
-    elif len(sys.argv)>3:
-        return
-    else:
-        args=str(sys.argv)
-        return args[2]
-        
 def readFile(file):
     commandList=""
     if file.startswith("http://"):
         url=urllib.request.urlopen(file)
-        commandList=url.read().decode('utf-8')
+        commandList=url.read().decode('utf-8') 
     else:
         commandList = open(file, 'r')
-        commandList.read() 
     return commandList
 
 def getCommand(cmd):
@@ -51,11 +47,11 @@ class lightTester():
     lights=[]
     
     def __init__(self,N):
+        N = int(N)
         self.lights = [[False]*N for _ in range(N)]
         self.size = N
     
     def apply(self,line):
-        print(line)
         start1 = int(line[1])
         start2 = int(line[2])
         end1 = int(line[3])
@@ -88,8 +84,6 @@ class lightTester():
                                  self.lights[i][j]=False
                              elif self.lights[i][j] == False:
                                  self.lights[i][j]=True
-                             
-                         
         else:
             print("Invalid command!")
             
@@ -101,6 +95,4 @@ class lightTester():
                          count+=1
         return count
     
-    
-    
-    
+print(main())

@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """Tests for `solve_led_project` package."""
-
+import sys
+sys.path.append('.')
 import pytest
-from click.testing import CliRunner
 
 from solve_led_project.solve_led_project import *
 
@@ -17,8 +17,8 @@ def test_checkReadFile():
     assert readFile(test_file)!= None
 
 def test_checkCommand():
-    text = "turn on 0,0 through 999,999"
-    assert getCommand(text) == [('turn on', '0', '0', '999', '999')]
+    test = [('turn on 0,0 through 999,999)')]
+    assert getCommand(test) == [('turn on', '0', '0', '999', '999')]
 
 def test_lightTester():
     lights = lightTester(5)
