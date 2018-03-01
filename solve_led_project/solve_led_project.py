@@ -6,13 +6,13 @@ import urllib.request
 import re
 
 def main():
-    file = 'http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt'
-    if file == 0: #len(sys.argv)<3: #
+    #file = 'http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt'
+    if len(sys.argv)<3: #file == 0: #
         return
-    elif  file == 1: #len(sys.argv)>3: #
+    elif len(sys.argv)>3: #file == 1: #
         return
     else:
-        #file = str(sys.argv[2])
+        file = str(sys.argv[2])
         if file == None:
             return "Error"
         else:
@@ -22,9 +22,9 @@ def main():
             lights=lightTester(firstLine)
             for line in instructions:
                 lights.apply(line)
-            return("The number occupied : ", lights.count())
+            return "The number occupied : ", lights.count()
 
-if __name__ == '_solve_led_project_':
+if __name__ == '__solve_led_project__':
     main()
 
 def readFile(file):
@@ -93,4 +93,3 @@ class lightTester():
                      if self.lights[i][j] == True: 
                          count+=1
         return count
-print(main())

@@ -13,11 +13,7 @@ setup(
     author_email='conor.lawlor@ucdconnect.ie',
     url='https://github.com/oleathlc/solve_led_project',
     entry_points={
-        'console_scripts': ['solve_led_project=solve_led_project.solve_led_project:solve_led_project',],
+        'console_scripts': ['solve_led_project=solve_led_project.solve_led_project:main'],
     },
-    include_package_data=True,
     license="MIT license",
-    zip_safe=False,
-    keywords='solve_led_project',
-    test_suite='tests',
 )
