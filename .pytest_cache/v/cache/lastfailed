@@ -1,5 +1,4 @@
 {
   "tests/test_solve_led_project.py::test_checkCoordinates": true,
-  "tests/test_solve_led_project.py::test_command_line_interface": true,
-  "tests/test_solve_led_project.py::test_lightTester": true
+  "tests/test_solve_led_project.py::test_command_line_interface": true
 }

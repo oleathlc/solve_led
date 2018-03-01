@@ -22,11 +22,19 @@ def test_checkCommand():
 
 def test_lightTester():
     lights = lightTester(5)
-    command = ['turn on', '0', '0', '5', '5']
-    lights.apply(command)
-    #print(lights.lights) #was here to check the array size
-    #print(lights.count()) #was here to check the count worked
-    assert lights.count() == 25
+    command1 = ['turn on', '0', '0', '5', '5']
+    lights.apply(command1)
+    print(lights.lights) #was here to check the array size
+    print(lights.count()) #was here to check the count worked
+    command2 = ['switch', '3', '3', '5', '5']
+    lights.apply(command2)
+    print(lights.lights) #was here to check the array size
+    print(lights.count()) #was here to check the count worked
+    command3 = ['turn off', '0', '0', '1', '1']
+    lights.apply(command3)
+    print(lights.lights) #was here to check the array size
+    print(lights.count()) #was here to check the count worked
+    assert lights.count() == 20
 
 
 def test_checkArgs():

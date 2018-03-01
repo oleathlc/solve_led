@@ -71,24 +71,25 @@ class lightTester():
         
         if (line[0] =="turn on") or (line[0] =="turn off" ) or (line[0] =="switch") :
             if line[0] == "turn on":
-                 for i in range(start1, end1):
-                     for j in range(start2, end2):
-                         self.lights[i][j] = True  
+                if start1<=end1 and start2<=end2:
+                     for i in range(start1, end1):
+                         for j in range(start2, end2):
+                             self.lights[i][j] = True  
             elif line[0] == "turn off":
-                for i in range(start1, end1):
-                     for j in range(start2, end2):
-                         self.lights[i][j] = False
+                if start1<=end1 and start2<=end2:
+                    for i in range(start1, end1):
+                         for j in range(start2, end2):
+                             self.lights[i][j] = False
             elif line[0] =="switch":
-                for i in range(start1, end1):
-                     for j in range(start2, end2):
-                         if self.lights[i] == True:
-                             self.lights[i]=False
-                         else:
-                             self.lights[i]==True
-                         if self.lights[j] == True:
-                             self.lights[j]=False
-                         else:
-                             self.lights[j]==True
+                if start1<=end1 and start2<=end2:
+                    for i in range(start1, end1):
+                         for j in range(start2, end2):
+                             if self.lights[i][j] == True:
+                                 self.lights[i][j]=False
+                             elif self.lights[i][j] == False:
+                                 self.lights[i][j]=True
+                             
+                         
         else:
             print("Invalid command!")
             
