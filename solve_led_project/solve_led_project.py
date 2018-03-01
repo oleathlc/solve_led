@@ -6,26 +6,25 @@ import urllib.request
 import re
 
 def main():
-    #file = 'http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt'
-    if len(sys.argv)<3: #file == 0: #
+    file = 'http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt'
+    if file == 0: #len(sys.argv)<3: #
         return
-    elif  len(sys.argv)>3: #file == 1: #
+    elif  file == 1: #len(sys.argv)>3: #
         return
     else:
-        file = str(sys.argv[2])
+        #file = str(sys.argv[2])
         if file == None:
             return "Error"
         else:
             instructions = readFile(file)
             firstLine = instructions.split('\n')[0]
             instructions = getCommand(instructions)
-            rest = instructions[1:]
             lights=lightTester(firstLine)
-            for line in rest:
+            for line in instructions:
                 lights.apply(line)
-            return "The number occupied : ", lights.count()
+            return("The number occupied : ", lights.count())
 
-if __name__ == '__main__':
+if __name__ == '_solve_led_project_':
     main()
 
 def readFile(file):
@@ -60,26 +59,26 @@ class lightTester():
             start1 = 0
         if start2 < 0:
             start2 = 0
-        if end1 >self.size: #make sure end points aren't greater than array size
+        if end1 >=self.size: #make sure end points aren't greater than array size
             end1 = self.size-1
-        if end2 >self.size-1:
-            end2 = self.size
+        if end2 >=self.size:
+            end2 = self.size-1
         
         if (line[0] =="turn on") or (line[0] =="turn off" ) or (line[0] =="switch") :
             if line[0] == "turn on":
                 if start1<=end1 and start2<=end2:
-                     for i in range(start1, end1):
-                         for j in range(start2, end2):
+                     for i in range(start1, end1+1):
+                         for j in range(start2, end2+1):
                              self.lights[i][j] = True  
             elif line[0] == "turn off":
                 if start1<=end1 and start2<=end2:
-                    for i in range(start1, end1):
-                         for j in range(start2, end2):
+                    for i in range(start1, end1+1):
+                         for j in range(start2, end2+1):
                              self.lights[i][j] = False
             elif line[0] =="switch":
                 if start1<=end1 and start2<=end2:
-                    for i in range(start1, end1):
-                         for j in range(start2, end2):
+                    for i in range(start1, end1+1):
+                         for j in range(start2, end2+1):
                              if self.lights[i][j] == True:
                                  self.lights[i][j]=False
                              elif self.lights[i][j] == False:
@@ -94,5 +93,4 @@ class lightTester():
                      if self.lights[i][j] == True: 
                          count+=1
         return count
-    
 print(main())

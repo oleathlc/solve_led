@@ -5,7 +5,6 @@
 
 from setuptools import setup
 
-
 setup(
     name='solve_led_project',
     version='0.1.0',
@@ -14,7 +13,7 @@ setup(
     author_email='conor.lawlor@ucdconnect.ie',
     url='https://github.com/oleathlc/solve_led_project',
     entry_points={
-        'console_scripts': ['solve_led_project=solve_led_project.solve_led_project:main',],
+        'console_scripts': ['solve_led_project=solve_led_project.solve_led_project:solve_led_project',],
     },
     include_package_data=True,
     license="MIT license",
