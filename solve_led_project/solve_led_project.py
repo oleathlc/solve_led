@@ -12,18 +12,18 @@ def main():
     each line, switching the lights in the grid on/off/toggling them. Finally it runs a count on the lights left on after
     all these operations and returns the number of lights left on.'''
     if len(sys.argv)<3:
-        return "Error - must have only one file as an argument e.g. solve_led_project --input text.txt"
+        return "Error - must have one and only one file as an argument e.g. solve_led_project --input text.txt"
     elif len(sys.argv)>3:
-        return "Error - must have only one file as an argument e.g. solve_led_project --input text.txt"
+        return "Error - must have one and only one file as an argument e.g. solve_led_project --input text.txt"
     else:
         file = str(sys.argv[2])
-        if file == None:
+        instructions = readFile(file)
+        if instructions == '':
             return "Error - file is empty"
         else:
-            instructions = readFile(file)
             firstLine = instructions.split('\n')[0]
-            instructions = getCommand(instructions)
             lights=lightTester(firstLine)
+            instructions = getCommand(instructions)
             for line in instructions:
                 lights.apply(line)
             return "The number occupied : ", lights.count()
@@ -65,10 +65,7 @@ class lightTester():
         '''Splits the RegEx lines given to it up into commands and coordinates. Checks coordinates aren't outside the range, if so 
         it amends them to fit inside. Depending on the command, turns all lights on or off or switches them based on the coordinates
         given to it'''
-        start1 = int(line[1])
-        start2 = int(line[2])
-        end1 = int(line[3])
-        end2 = int(line[4])
+        start1, start2, end1, end2 = int(line[1]), int(line[2]), int(line[3]), int(line[4])
         if start1 < 0: #make sure start points are 0 or greater
             start1 = 0
         if start2 < 0:
@@ -77,7 +74,6 @@ class lightTester():
             end1 = self.size-1
         if end2 >=self.size:
             end2 = self.size-1
-        
         if (line[0] =="turn on") or (line[0] =="turn off" ) or (line[0] =="switch") :
             if line[0] == "turn on":
                 if start1<=end1 and start2<=end2:
@@ -97,8 +93,6 @@ class lightTester():
                                  self.lights[i][j]=False
                              elif self.lights[i][j] == False:
                                  self.lights[i][j]=True
-        else:
-            print("Invalid command!")
             
     def count(self):
         '''Checks each point in the grid to see if the light is on. For each light on it counts it and then returns the total count of lights
