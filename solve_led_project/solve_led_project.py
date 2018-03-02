@@ -6,15 +6,19 @@ import urllib.request
 import re
 
 def main():
-    #file = 'http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_d.txt'
-    if len(sys.argv)<3: #file == 0: #
-        return
-    elif len(sys.argv)>3: #file == 1: #
-        return
+    '''Checks that an argument has been given, otherwise returns and error. Then checks that the file contains something. 
+    Then it converts the file to a string, takes the first line as the size of the array for our lightTester and then 
+    splits the rest of the string into lines of commands and coordinates. Then it runs the lightTester method apply on 
+    each line, switching the lights in the grid on/off/toggling them. Finally it runs a count on the lights left on after
+    all these operations and returns the number of lights left on.'''
+    if len(sys.argv)<3:
+        return "Error - must have only one file as an argument e.g. solve_led_project --input text.txt"
+    elif len(sys.argv)>3:
+        return "Error - must have only one file as an argument e.g. solve_led_project --input text.txt"
     else:
         file = str(sys.argv[2])
         if file == None:
-            return "Error"
+            return "Error - file is empty"
         else:
             instructions = readFile(file)
             firstLine = instructions.split('\n')[0]
@@ -28,6 +32,8 @@ if __name__ == '__solve_led_project__':
     main()
 
 def readFile(file):
+    '''Checks if the file name provided contains 'http' at the start. If so, opens and reads it as a url, otherwise, opens and reads
+    it like any other file. Returns a string containing the text of the file just read'''
     commandList=""
     if file.startswith("http://"):
         url=urllib.request.urlopen(file)
@@ -38,20 +44,27 @@ def readFile(file):
     return commandList
 
 def getCommand(cmd):
-        pattern = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
-        command = re.findall(pattern, str(cmd))
-        return command
+    '''Sets a RegEx pattern and then reads a string given to it and returns all the lines that match that pattern as a set of lists
+    which can be operated on'''
+    pattern = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
+    command = re.findall(pattern, str(cmd))
+    return command
 
     
 class lightTester():
+    '''Class to create a lights grid'''
     lights=[]
     
     def __init__(self,N):
+        '''Takes input N and takes as the size of the array of arrays for the grid. Every light in the grid is set to false (off).'''
         N = int(N)
         self.lights = [[False]*N for _ in range(N)]
         self.size = N
     
     def apply(self,line):
+        '''Splits the RegEx lines given to it up into commands and coordinates. Checks coordinates aren't outside the range, if so 
+        it amends them to fit inside. Depending on the command, turns all lights on or off or switches them based on the coordinates
+        given to it'''
         start1 = int(line[1])
         start2 = int(line[2])
         end1 = int(line[3])
@@ -88,6 +101,8 @@ class lightTester():
             print("Invalid command!")
             
     def count(self):
+        '''Checks each point in the grid to see if the light is on. For each light on it counts it and then returns the total count of lights
+        that are on in the grid.'''
         count=0
         for i in range(len(self.lights)):
                 for j in range(len(self.lights)):
